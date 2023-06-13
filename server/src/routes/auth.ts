@@ -1,9 +1,12 @@
 import { Request, Response, Router } from 'express';
 import bcrypt from 'bcrypt';
-
 import EmailValidator from 'email-validator';
 import { validatePassword } from '../middlewares/validatePasswords';
-import { getUserByEmail, createNewUser } from '../models/user';
+import {
+    getUserByEmail,
+    createNewUser,
+    getUserPasswordForLogin,
+} from '../models/user';
 
 const route = Router();
 const saltRounds = 10;
@@ -31,14 +34,7 @@ route.post('/register', async (req: Request, res: Response) => {
         if (!emailExists) {
             const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-            const newUser = await createNewUser(
-                name,
-                email,
-                hashedPassword,
-                timeZone
-            );
-            console.log('account created:', newUser);
-
+            await createNewUser(name, email, hashedPassword, timeZone);
             return res
                 .status(201)
                 .json({ message: 'New user successfully created!' });
@@ -51,30 +47,49 @@ route.post('/register', async (req: Request, res: Response) => {
     }
 });
 
-route.post('/login', (req: Request, res: Response) => {
-    // check if email exists
-    // check is passwords match bcypt
-    // assign cookie or session id or smtg like that
+route.post('/login', async (req: Request, res: Response) => {
+    try {
+        const { email, password } = req.body;
 
-    // const userId = 1;
-    // res.set('Set-Cookie', `session=${userId}`);
-    // res.send('success - logged in');
+        if (!email || !password) {
+            return res
+                .status(400)
+                .json({ message: 'Email and/or password missing!' });
+        }
 
-    // req.session.userId = newUser;
+        const user = await getUserByEmail(email);
 
-    res.send('login route');
+        if (!user) {
+            return res.status(404).json({ message: 'User not found!' });
+        }
+
+        const userPassword = await getUserPasswordForLogin(email);
+        const passwordVerfied = await bcrypt.compare(password, userPassword);
+
+        if (!passwordVerfied) {
+            return res.status(401).json({ message: 'Invalid credentials!' });
+        } else {
+            req.session.userId = user._id.toString();
+            req.session.role = user.role;
+            req.session.save(() => {
+                res.status(200).json({
+                    userId: user._id.toString(),
+                    role: user.role,
+                });
+            });
+        }
+    } catch (error) {
+        console.log(`Unable to log in: ${error}`);
+        return res.status(500).json({ message: 'Unable to log in!' });
+    }
 });
 
 route.post('/logout', (req: Request, res: Response) => {
-    // check if session exists
-    // if exits destroy
-    // else send error
     req.session.destroy(() => {
-        console.log('in Auth logged out function');
         res.json({ message: 'User has logged out' });
     });
 });
 
-// TODO: forgot password
+// TODO: forgot password route - send email in authentication/login
 
 export default route;
