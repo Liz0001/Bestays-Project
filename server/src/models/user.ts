@@ -65,15 +65,7 @@ const userSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-// userSchema.pre('save', async (next) => {
-//     const user = this;
-//     if (user.isModified('password')) {
-//         user!.password = await bcrypt.hash(user.password, salRounds);
-//     }
-//     next();
-// });
-
-// TODO: get user by id etc
+// TODO: get user by ID etc
 
 // TODO: Change Password
 
@@ -98,6 +90,11 @@ async function createNewUser(
     return newUser;
 }
 
-const User = mongoose.model('User', userSchema);
+async function getUserPasswordForLogin(email: string) {
+    const userPass = await User.findOne({ email }).select('password');
+    if (!userPass) return '';
+    else return userPass.password;
+}
 
-export { User, getUserByEmail, createNewUser };
+const User = mongoose.model('User', userSchema);
+export { User, getUserByEmail, createNewUser, getUserPasswordForLogin };
