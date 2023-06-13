@@ -20,7 +20,7 @@ import { isLoggedIn } from './middlewares/isLoggedIn';
 declare module 'express-session' {
     interface SessionData {
         userId: string;
-        role: [string];
+        role: string[];
     }
 }
 
