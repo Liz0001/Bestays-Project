@@ -1,6 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 
-export function isLoggedIn(req: Request, res: Response, next: NextFunction) {
+export function isAuthenticated(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
     const userId = req.session.userId;
 
     if (userId) {
@@ -8,6 +12,6 @@ export function isLoggedIn(req: Request, res: Response, next: NextFunction) {
     } else {
         return res
             .status(401)
-            .json({ message: 'Unauthorized. Not logged in!' });
+            .json({ message: 'Unauthenticated. Not logged in!' });
     }
 }
