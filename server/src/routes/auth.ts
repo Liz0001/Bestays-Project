@@ -93,6 +93,7 @@ route.post('/logout', (req: Request, res: Response) => {
     req.session.destroy(() => {
         res.json({ message: 'User has logged out' });
     });
+    res.clearCookie('bestays-cookie');
 });
 
 // TODO: forgot password route - send email in authentication/login

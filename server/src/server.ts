@@ -15,12 +15,14 @@ import authRoute from './routes/auth';
 import userRoute from './routes/user';
 import adminRoute from './routes/admin';
 import superAdminRoute from './routes/superAdmin';
-import { isLoggedIn } from './middlewares/isLoggedIn';
+import { isAuthenticated } from './middlewares/isAuthenticated';
+import { authorizeAdmin } from './middlewares/authorizeAdmin';
+import { authorizeSuperAdmin } from './middlewares/authorizeSuperAdmin';
 
 declare module 'express-session' {
     interface SessionData {
         userId: string;
-        role: string[];
+        role: string;
     }
 }
 
@@ -32,11 +34,25 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     next();
 });
 
+// need to test, if that piece of code solves the axios request issue
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', [
+//         `http://localhost:${port}`,
+//         `https://localhost:${port}`,
+//     ]);
+//     res.header(
+//         'Access-Control-Allow-Headers',
+//         'Origin, X-Requested-With, Content-Type, Accept'
+//     );
+//     next();
+// });
+
 app.use(
     cors({
-        origin: [`http://localhost:${port}`],
+        origin: [`http://localhost:${port}`, `https://localhost:${port}`],
         methods: 'GET, POST, PUT, DELETE',
         credentials: true,
+        exposedHeaders: ['set-cookie'],
     })
 );
 
@@ -56,12 +72,15 @@ app.use(
 // check this
 // app.use(express.urlencoded({ extended: true }));
 
-app.use('/auth', authRoute); // TODO: 1st to do
-
-app.use('/api/user', isLoggedIn, userRoute); // user specific data - profile etc
-
-// app.use('/api/admin', isLoggedIn, adminRoute); // admin specific data
-// app.use('/api/superAdmin', isLoggedIn, superAdminRoute);
+app.use('/auth', authRoute);
+app.use('/api/user', isAuthenticated, userRoute); // user specific data - profile etc
+app.use('/api/admin', isAuthenticated, authorizeAdmin, adminRoute); // admin specific data
+app.use(
+    '/api/superAdmin',
+    isAuthenticated,
+    authorizeSuperAdmin,
+    superAdminRoute
+);
 // app.use('/api/dateReminder', dateReminderRoute);
 
 app.listen(port, async () => {
