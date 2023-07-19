@@ -1,0 +1,13 @@
+.navbar-button {
+    border-radius: 20px !important;
+    padding-right: 25px !important;
+    padding-left: 25px !important;
+}
+
+.navbar-button.desktop {
+    margin-left: 10px !important;
+}
+
+/* .small-logo-link {
+    padding-bottom: -10px !important;
+} */
