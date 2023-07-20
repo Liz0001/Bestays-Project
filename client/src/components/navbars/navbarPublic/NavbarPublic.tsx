@@ -48,17 +48,21 @@ export function NavbarPublic() {
                             href={`/` + item.toLowerCase()}
                             sx={{ textAlign: 'center' }}
                         >
-                            <ListItemText primary={item} />
+                            <ListItemText
+                                className="mobile-menu-links"
+                                primary={item}
+                            />
                         </ListItemButton>
                     </ListItem>
                 ))}
             </List>
             <Button
-                className="navbar-button mobile"
+                // sx={{ textTransform: 'none' }}
+                className="signin-button drawer"
                 href={goToSignIn}
                 variant="outlined"
             >
-                sign in
+                Sign in
             </Button>
         </Box>
     );
@@ -66,7 +70,7 @@ export function NavbarPublic() {
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-            <AppBar component="nav" position="static">
+            <AppBar component="nav" position="static" className="navbarr">
                 <Container maxWidth="xl">
                     <Toolbar>
                         <IconButton
@@ -78,13 +82,36 @@ export function NavbarPublic() {
                         >
                             <MenuIcon sx={{ color: '#E16913' }} />
                         </IconButton>
+
+                        {/* <Typography
+                            variant="h5"
+                            noWrap
+                            component="a"
+                            href=""
+                            sx={{
+                                mr: 2,
+                                display: { xs: 'flex', md: 'none' },
+                                flexGrow: 1,
+                                fontFamily: 'monospace',
+                                fontWeight: 700,
+                                letterSpacing: '.3rem',
+                                color: 'inherit',
+                                textDecoration: 'none',
+                            }}
+                        >
+                            Bestays
+                        </Typography> */}
+
                         <Typography
                             variant="h1"
                             component="div"
                             sx={{
                                 mb: -1.5,
+                                ml: -1,
                                 flexGrow: 1,
+
                                 display: { xs: 'none', sm: 'block' },
+                                // display: { sm: 'block' },
                             }}
                         >
                             <Link href="/">
@@ -94,24 +121,47 @@ export function NavbarPublic() {
                         {/* !!!!!!!!! */}
                         {/* BELOW IS small logo */}
 
-                        {/* <Typography
-                            variant="h3"
+                        <Typography
+                            variant="h6"
                             component="div"
+                            className="small-logo-div"
                             sx={{
-                                mb: -1,
+                                // mb: -1,
                                 flexGrow: 1,
                                 display: { xs: 'block', sm: 'none' },
-                                // display: {
-                                //     xs: 'block',
-                                //     sm: 'none',
-                                // },
                             }}
                         >
-                            <Link className="small-logo-link" href="/">
-                                <img src={Logo2} alt="Bestays Logo" />
+                            {/* <div className="nav-small-logo"> */}
+                            <Link href="/">
+                                <img
+                                    className="nav-small-logo"
+                                    src={Logo2}
+                                    alt="Bestays Logo"
+                                />
                             </Link>
+                            {/* </div> */}
+                        </Typography>
+
+                        {/* <Typography
+                            variant="h5"
+                            noWrap
+                            component="a"
+                            href=""
+                            sx={{
+                                mr: 2,
+                                display: { xs: 'flex', md: 'none' },
+                                flexGrow: 1,
+                                fontFamily: 'monospace',
+                                fontWeight: 700,
+                                letterSpacing: '.3rem',
+                                color: 'inherit',
+                                textDecoration: 'none',
+                            }}
+                        >
+                            LOGO0
                         </Typography> */}
 
+                        {/* Above IS small logo */}
                         {/* !!!!!!!!! */}
 
                         <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
@@ -124,8 +174,9 @@ export function NavbarPublic() {
                                     {item}
                                 </Button>
                             ))}
+
                             <Button
-                                className="navbar-button desktop"
+                                className="signin-button navbar"
                                 href={goToSignIn}
                                 variant="outlined"
                                 sx={{ color: '#E16913' }}
@@ -136,6 +187,7 @@ export function NavbarPublic() {
                     </Toolbar>
                 </Container>
             </AppBar>
+
             <Box component="nav" position="static">
                 <Drawer
                     variant="temporary"

@@ -1,13 +1,32 @@
-.navbar-button {
-    border-radius: 20px !important;
-    padding-right: 25px !important;
-    padding-left: 25px !important;
-}
+/* .navbarr {
+    box-shadow: none !important;
 
-.navbar-button.desktop {
-    margin-left: 10px !important;
-}
-
-/* .small-logo-link {
-    padding-bottom: -10px !important;
+    Original:
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+        0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+        0px 1px 10px 0px rgba(0, 0, 0, 0.12) 
+       
 } */
+
+.signin-button {
+    padding-right: 20px !important;
+    padding-left: 20px !important;
+}
+
+.signin-button.navbar {
+    margin-right: -2px;
+    margin-left: 10px;
+}
+
+.mobile-menu-links {
+    color: #e16913;
+}
+
+.small-logo-div {
+    text-align: center;
+}
+
+.nav-small-logo {
+    margin-bottom: -8px;
+    margin-right: 20px;
+}
