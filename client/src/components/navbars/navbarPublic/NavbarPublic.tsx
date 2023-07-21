@@ -19,7 +19,6 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import Logo from '../../../assets/logo/bestays_logo.svg';
 import Logo2 from '../../../assets/logo/bestays_logo_small.svg';
-
 import './navbarPublic.css';
 
 export function NavbarPublic() {
@@ -35,9 +34,13 @@ export function NavbarPublic() {
 
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-            <Typography variant="h6" sx={{ my: 2 }}>
+            <Typography variant="h6">
                 <Link href="/">
-                    <img src={Logo} alt="Bestays Logo" />
+                    <img
+                        className="mobile-nav-logo"
+                        src={Logo}
+                        alt="Bestays Logo"
+                    />
                 </Link>
             </Typography>
             <Divider />
@@ -45,11 +48,16 @@ export function NavbarPublic() {
                 {navItems.map((item) => (
                     <ListItem key={item} disablePadding>
                         <ListItemButton
-                            href={`/` + item.toLowerCase()}
                             sx={{ textAlign: 'center' }}
+                            href={`/` + item.toLowerCase()}
                         >
                             <ListItemText
                                 className="mobile-menu-links"
+                                sx={{
+                                    color: '#e16913',
+                                    fontSize: 14,
+                                    fontWeight: 500,
+                                }}
                                 primary={item}
                             />
                         </ListItemButton>
@@ -57,8 +65,7 @@ export function NavbarPublic() {
                 ))}
             </List>
             <Button
-                // sx={{ textTransform: 'none' }}
-                className="signin-button drawer"
+                className="signin-button"
                 href={goToSignIn}
                 variant="outlined"
             >
@@ -83,25 +90,6 @@ export function NavbarPublic() {
                             <MenuIcon sx={{ color: '#E16913' }} />
                         </IconButton>
 
-                        {/* <Typography
-                            variant="h5"
-                            noWrap
-                            component="a"
-                            href=""
-                            sx={{
-                                mr: 2,
-                                display: { xs: 'flex', md: 'none' },
-                                flexGrow: 1,
-                                fontFamily: 'monospace',
-                                fontWeight: 700,
-                                letterSpacing: '.3rem',
-                                color: 'inherit',
-                                textDecoration: 'none',
-                            }}
-                        >
-                            Bestays
-                        </Typography> */}
-
                         <Typography
                             variant="h1"
                             component="div"
@@ -109,29 +97,23 @@ export function NavbarPublic() {
                                 mb: -1.5,
                                 ml: -1,
                                 flexGrow: 1,
-
                                 display: { xs: 'none', sm: 'block' },
-                                // display: { sm: 'block' },
                             }}
                         >
                             <Link href="/">
                                 <img src={Logo} alt="Bestays Logo" />
                             </Link>
                         </Typography>
-                        {/* !!!!!!!!! */}
-                        {/* BELOW IS small logo */}
 
                         <Typography
                             variant="h6"
                             component="div"
-                            className="small-logo-div"
                             sx={{
-                                // mb: -1,
+                                textAlign: 'center',
                                 flexGrow: 1,
                                 display: { xs: 'block', sm: 'none' },
                             }}
                         >
-                            {/* <div className="nav-small-logo"> */}
                             <Link href="/">
                                 <img
                                     className="nav-small-logo"
@@ -139,30 +121,7 @@ export function NavbarPublic() {
                                     alt="Bestays Logo"
                                 />
                             </Link>
-                            {/* </div> */}
                         </Typography>
-
-                        {/* <Typography
-                            variant="h5"
-                            noWrap
-                            component="a"
-                            href=""
-                            sx={{
-                                mr: 2,
-                                display: { xs: 'flex', md: 'none' },
-                                flexGrow: 1,
-                                fontFamily: 'monospace',
-                                fontWeight: 700,
-                                letterSpacing: '.3rem',
-                                color: 'inherit',
-                                textDecoration: 'none',
-                            }}
-                        >
-                            LOGO0
-                        </Typography> */}
-
-                        {/* Above IS small logo */}
-                        {/* !!!!!!!!! */}
 
                         <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                             {navItems.map((item) => (
