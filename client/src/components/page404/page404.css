@@ -1,10 +1,11 @@
 .not-found {
-    /* margin-top: 300px; */
+    z-index: -10;
     position: fixed;
-    top: 0;
+    top: 100.04px;
     left: 0;
     bottom: 0;
     right: 0;
+
     background-image: url('../../assets/images/404.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -14,13 +15,46 @@
 .text-404 {
     width: 100%;
     height: 100%;
+
     text-align: center;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    padding-top: 35vh;
+
+    padding: 10px;
     color: white;
-    background-color: rgba(0, 0, 0, 0.679);
+    background-color: #3c333390;
 }
 
-.oops {
-    color: chocolate;
+.oops,
+.text-404 a {
+    color: #e16913;
+    font-weight: bold;
+}
+
+.text-404 a {
+    display: inline-block;
+    margin-top: 15px;
+    text-shadow: 3px 3px 6px #000;
+}
+
+.text-404 h2 {
+    font-size: 28px;
+}
+
+.text-404 p {
+    font-size: 20px;
+}
+
+.text-404 h2,
+.text-404 p {
+    font-weight: bold;
+    text-shadow: 3px 3px 3px #000;
+}
+
+/* 600 and smaller - WIDTH */
+@media only screen and (max-width: 600px) {
+    .not-found {
+        top: 66.33px;
+    }
 }
