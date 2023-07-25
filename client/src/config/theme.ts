@@ -13,9 +13,15 @@ const theme = createTheme({
         background: {
             default: '#fff',
         },
+        text: {
+            primary: '#565656',
+        },
     },
     typography: {
         fontSize: 14,
+        fontFamily: "'Inter' sans-serif",
+        fontWeightRegular: 400,
+        fontWeightBold: 700,
     },
     components: {
         MuiAppBar: {

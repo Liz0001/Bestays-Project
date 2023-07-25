@@ -1,4 +1,4 @@
-/* import FONT */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 * {
     margin: 0;
@@ -10,11 +10,10 @@
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
+    font-family: Inter;
 }
 
-/* @media (prefers-color-scheme: light) {
-    :root {
-        color: #213547;
-        background-color: #ffffff;
-    }
-} */
+.logo-font {
+    font-family: 'Playfair Display';
+    font-style: italic;
+}
