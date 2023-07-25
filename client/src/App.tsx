@@ -15,21 +15,23 @@ export default function App() {
 
     return (
         <ThemeProvider theme={theme}>
-            <Routes>
-                {/* Public routes */}
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/*" element={<Page404 />} />
+            <main>
+                <Routes>
+                    {/* Public routes */}
+                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/about" element={<AboutPage />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/*" element={<Page404 />} />
 
-                {/* PRIVATE ROUTES LATER */}
-                {/* <Route path="/bestays/*"> */}
-                {/* <Route path="" element={<Board />} /> */}
-                {/* <Route path="/profile" element={<Profile />} /> */}
-                {/* <Route path="*" element={<Page404 />} /> */}
-                {/* </Route> */}
-                {/* <Route path="/admin" element={<Admin />} /> */}
-            </Routes>
+                    {/* PRIVATE ROUTES LATER */}
+                    {/* <Route path="/bestays/*"> */}
+                    {/* <Route path="" element={<Board />} /> */}
+                    {/* <Route path="/profile" element={<Profile />} /> */}
+                    {/* <Route path="*" element={<Page404 />} /> */}
+                    {/* </Route> */}
+                    {/* <Route path="/admin" element={<Admin />} /> */}
+                </Routes>
+            </main>
             {welcomePages && <Footer />}
         </ThemeProvider>
     );
