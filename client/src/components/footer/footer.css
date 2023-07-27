@@ -1,23 +1,18 @@
 .footer {
-    height: 200px;
+    height: 180px;
     background-image: url('../../assets/images/footer.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top center;
-    padding: 20px 10px 10px;
 }
 
 .footer-content {
-    min-height: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     text-align: center;
     justify-content: center;
     overflow: hidden;
-}
-
-.footer-content h2 {
-    margin-top: 20px;
 }
 
 .footer-social div {
@@ -36,31 +31,28 @@
     color: #e16913;
 }
 
-/* up to 600 - WIDTH */
+.footer-logo {
+    height: 45px;
+}
+
+.footer-logo img {
+    height: 100%;
+    width: auto;
+}
+
+/* 600 and SMALLER - width */
 @media only screen and (max-width: 600px) {
     .footer {
-        height: 180px;
+        height: 170px;
     }
-    .footer-content h2 {
-        margin-top: 15px;
-    }
-}
-
-/* 1200 and up - WIDTH */
-@media only screen and (min-width: 1300px) {
-    .footer {
-        height: 220px;
-    }
-    .footer-content h2 {
-        margin-top: 25px;
+    .footer-logo {
+        height: 40px;
     }
 }
 
-@media only screen and (min-width: 2000px) {
+/* 1440 and up - WIDTH */
+@media only screen and (min-width: 1440px) {
     .footer {
-        height: 220px;
-    }
-    .footer-content h2 {
-        margin-top: 30px;
+        height: 190px;
     }
 }

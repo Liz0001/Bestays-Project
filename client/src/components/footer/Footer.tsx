@@ -2,8 +2,7 @@ import { Container, Link, Typography } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
-
-// import Logo from '../../assets/logo/bestays_logo_small.png';
+import logo from '../../assets/logo/logo_transparent.png';
 import './footer.css';
 import './sticky-footer.css';
 
@@ -16,7 +15,9 @@ export function Footer() {
         <div className="footer">
             <Container sx={{ height: '100%' }}>
                 <div className="footer-content">
-                    <h2 className="logo-font">BESTAYS</h2>
+                    <div className="footer-logo">
+                        <img src={logo} alt="Bestays logo" />
+                    </div>
                     <Typography sx={{ fontSize: 14 }}>
                         Embrace every moment, never forget a celebration!
                     </Typography>
