@@ -1,6 +1,7 @@
 import { createTheme } from '@mui/material';
 // #E16913 - font main orange
-// #565656 - fort secondary dark
+// #565656 - font secondary dark
+// #FFEBDD - footer light pink
 
 const theme = createTheme({
     palette: {
