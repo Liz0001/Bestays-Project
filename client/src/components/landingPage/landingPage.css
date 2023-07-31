@@ -86,7 +86,8 @@
 /** Bottom section of landing page
 ================================ **/
 
-/** MOBILE  **/
+/** MOBILE media sizes
+================================ **/
 /* ... and SMALLER - width */
 @media only screen and (max-width: 800px) {
     .bg-container {
@@ -111,6 +112,7 @@
         top: 30%;
         min-width: unset;
         max-width: unset;
+        background-image: linear-gradient(to right, #fff, #ffffffdd, #ffebdd94);
     }
     .wrapper {
         width: 100vw;
