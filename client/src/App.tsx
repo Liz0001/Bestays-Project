@@ -7,6 +7,8 @@ import { AboutPage } from './components/aboutPage/AboutPage';
 import { Contact } from './components/contact/Contact';
 import { Page404 } from './components/page404/Page404';
 import { Footer } from './components/footer/Footer';
+import { Login } from './components/loginRegister/login/Login';
+import { Register } from './components/loginRegister/register/Register';
 
 export default function App() {
     const welcomePages = ['/', '/about', '/contact'].includes(
@@ -21,6 +23,9 @@ export default function App() {
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/contact" element={<Contact />} />
+
+                    <Route path="/signin" element={<Login />} />
+                    <Route path="/signup" element={<Register />} />
                     <Route path="/*" element={<Page404 />} />
 
                     {/* PRIVATE ROUTES LATER */}
