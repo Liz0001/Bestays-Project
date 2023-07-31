@@ -86,8 +86,59 @@
 /** Bottom section of landing page
 ================================ **/
 
-/** MOBILE media sizes
+.bottom-section {
+    margin: 40px 0;
+}
+
+.strong-text {
+    font-weight: bold;
+}
+
+.examples {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: space-evenly;
+    color: #e16913;
+    font-size: 35px;
+}
+
+.examples > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.example-name {
+    display: inline-block;
+    margin-top: 15px;
+    font-size: 17px;
+    color: #565656;
+}
+
+.outro,
+.intro {
+    width: 95%;
+    margin: auto;
+    font-weight: normal;
+    margin-bottom: 30px;
+}
+
+.outro {
+    text-align: right;
+    margin-bottom: 30px;
+}
+
+.description {
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 40px;
+}
+
+/** MOBILE media sizes for top section
 ================================ **/
+
 /* ... and SMALLER - width */
 @media only screen and (max-width: 800px) {
     .bg-container {
@@ -116,6 +167,25 @@
     }
     .wrapper {
         width: 100vw;
+    }
+
+    .outro,
+    .intro {
+        text-align: center;
+    }
+    .description {
+        text-align: center;
+    }
+
+    .examples {
+        flex-direction: column;
+    }
+    .examples > div {
+        margin-bottom: 10px;
+    }
+
+    .examples > div:last-child {
+        margin-bottom: 0;
     }
 }
 

@@ -1,5 +1,5 @@
 import { NavbarPublic } from '../navbars/navbarPublic/NavbarPublic';
-import { AddedValueSection } from './AddedValueSection';
+import { IntroSection } from './IntroSection';
 import { HeroSection } from './HeroSection';
 
 export function LandingPage() {
@@ -7,7 +7,7 @@ export function LandingPage() {
         <>
             <NavbarPublic />
             <HeroSection />
-            <AddedValueSection />
+            <IntroSection />
         </>
     );
 }
