@@ -91,30 +91,35 @@ export function NavbarPublic() {
                         </IconButton>
 
                         <Typography
-                            variant="h1"
+                            variant="h6"
                             component="div"
+                            className="desktop-nav-logo"
                             sx={{
-                                mb: -1.5,
                                 ml: -1,
                                 flexGrow: 1,
-                                display: { xs: 'none', sm: 'block' },
+                                display: {
+                                    xs: 'none',
+                                    sm: 'flex',
+                                },
                             }}
                         >
-                            <Link href="/">
-                                <img src={Logo} alt="Bestays Logo" />
-                            </Link>
+                            <div>
+                                <Link className="logo-link" href="/">
+                                    <img src={Logo} alt="Bestays Logo" />
+                                </Link>
+                            </div>
                         </Typography>
 
                         <Typography
-                            variant="h6"
                             component="div"
+                            className="b-nav-logo"
                             sx={{
                                 textAlign: 'center',
                                 flexGrow: 1,
-                                display: { xs: 'block', sm: 'none' },
+                                display: { xs: 'flex', sm: 'none' },
                             }}
                         >
-                            <Link href="/">
+                            <Link className="logo-link-mob" href="/">
                                 <img
                                     className="nav-small-logo"
                                     src={Logo2}
