@@ -1,5 +1,5 @@
 .footer {
-    height: 180px;
+    height: 150px;
     background-image: url('../../assets/images/footer.png');
     background-repeat: no-repeat;
     background-size: cover;
@@ -32,7 +32,7 @@
 }
 
 .footer-logo {
-    height: 45px;
+    height: 40px;
 }
 
 .footer-logo img {
@@ -40,19 +40,26 @@
     width: auto;
 }
 
-/* 600 and SMALLER - width */
-@media only screen and (max-width: 600px) {
-    .footer {
-        height: 170px;
-    }
-    .footer-logo {
-        height: 40px;
-    }
-}
-
 /* 1440 and up - WIDTH */
 @media only screen and (min-width: 1440px) {
     .footer {
-        height: 190px;
+        height: 170px;
+    }
+}
+
+/* 600 and SMALLER - width */
+@media only screen and (max-width: 600px) {
+    .footer-logo {
+        height: 35px;
+    }
+}
+
+/* 365 and SMALLER - width */
+@media only screen and (max-width: 365px) {
+    .footer {
+        height: 155px;
+    }
+    .footer-social a {
+        padding: 2px 5px;
     }
 }
