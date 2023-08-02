@@ -4,9 +4,9 @@ import './page404.css';
 
 export function Page404() {
     return (
-        <>
-            <NavbarPublic />
+        <div className="box">
             <div className="not-found">
+                <NavbarPublic />
                 <div className="text-404">
                     <h2>Oi Oops ... </h2>
                     <p>We couldn't find this page!</p>
@@ -18,6 +18,6 @@ export function Page404() {
                     <Link href="/">GO BACK HOME</Link>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
