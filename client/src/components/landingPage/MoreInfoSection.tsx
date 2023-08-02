@@ -6,9 +6,9 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Container } from '@mui/material';
 
-export function IntroSection() {
+export function MoreInfoSection() {
     return (
-        <Container maxWidth="lg" className="bottom-section">
+        <Container maxWidth="md" className="bottom-section">
             <div className="offer-section">
                 <h2 className="intro">We help you to keep up with: </h2>
                 <div className="examples">

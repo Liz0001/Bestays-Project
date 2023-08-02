@@ -182,7 +182,7 @@
     .outro,
     .intro {
         text-align: center;
-        /* TODO: font-size: 16px; */
+        font-size: 22px;
     }
     .description {
         text-align: center;
