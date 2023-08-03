@@ -9,6 +9,7 @@ import cors from 'cors';
 
 const app: Application = express();
 const port: string | number = process.env.PORT || 8000;
+const client_port: string | number = process.env.CLIENT_PORT || 9000;
 const cookie_secret: any = process.env.COOKIE_SECRET;
 
 import authRoute from './routes/auth';
@@ -49,7 +50,10 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 app.use(
     cors({
-        origin: [`http://localhost:${port}`, `https://localhost:${port}`],
+        origin: [
+            `http://localhost:${client_port}`,
+            `https://localhost:${client_port}`,
+        ],
         methods: 'GET, POST, PUT, DELETE',
         credentials: true,
         exposedHeaders: ['set-cookie'],
