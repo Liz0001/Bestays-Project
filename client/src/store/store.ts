@@ -1,9 +1,11 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import thunkMiddleware, { ThunkDispatch } from 'redux-thunk';
-import loginRegisterReducer from './features/loginRegister/loginRegisterSlice';
+import registerReducer from './features/loginRegister/registerSlice';
+import loginReducer from './features/loginRegister/loginSlice';
 
 const rootReducer = combineReducers({
-    loginRegister: loginRegisterReducer,
+    register: registerReducer,
+    login: loginReducer,
 });
 
 export const store = configureStore({
@@ -20,7 +22,3 @@ export type AppDispatch = ThunkDispatch<RootState, undefined, any>;
 // https://medium.com/developer-rants/session-cookies-between-express-js-and-vue-js-with-axios-98a10274fae7
 
 // https://dev.to/akshatsinghania/express-session-cookie-not-working-react-axios-16d9
-
-// needs to be sent with registration form
-// const defaultTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-// console.log(defaultTimeZone);
