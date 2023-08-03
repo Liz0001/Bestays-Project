@@ -19,18 +19,27 @@ route.post('/register', async (req: Request, res: Response) => {
         password = password.trim();
 
         const validatedEmail = EmailValidator.validate(email);
-        const validatedPassword = validatePassword(password);
-        const emailExists = await getUserByEmail(email);
-
-        if (!name || !email || !password || passwordCheck !== password) {
+        if (!validatedEmail) {
             return res.status(400).json({
-                message: 'Parameters are missing or passwords not matching!',
+                message: 'Email is not valid!',
             });
         }
 
-        if (!validatedEmail || !validatedPassword) {
+        const emailExists = await getUserByEmail(email);
+        if (emailExists) {
+            return res.status(400).json({ message: 'Email already exists!' });
+        }
+
+        if (!name || !email || !password || passwordCheck !== password) {
             return res.status(400).json({
-                message: 'Email is not valid or password is not strong enough!',
+                message: 'Parameters are missing or passwords don`t match!',
+            });
+        }
+
+        const validatedPassword = validatePassword(password);
+        if (!validatedPassword) {
+            return res.status(400).json({
+                message: 'Password is not strong enough!',
             });
         }
 
@@ -42,7 +51,7 @@ route.post('/register', async (req: Request, res: Response) => {
                 .status(201)
                 .json({ message: 'New user successfully created!' });
         } else {
-            return res.status(400).json({ message: 'Email already exists!' });
+            return res.status(400).json({ message: 'Unable to register!' });
         }
     } catch (error) {
         console.log(`Unable to register user: ${error}`);
