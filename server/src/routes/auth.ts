@@ -13,10 +13,10 @@ const saltRounds = 10;
 
 route.post('/register', async (req: Request, res: Response) => {
     try {
-        let { name, email, password, passwordCheck, timeZone } = req.body;
+        let { name, email, password, passwordCheck, timeZone } =
+            req.body.newUserData;
         name = name.trim();
         email = email.trim();
-        password = password.trim();
 
         const validatedEmail = EmailValidator.validate(email);
         if (!validatedEmail) {
