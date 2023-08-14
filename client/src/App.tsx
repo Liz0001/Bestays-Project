@@ -9,6 +9,7 @@ import { Page404 } from './components/page404/Page404';
 import { Footer } from './components/footer/Footer';
 import { Login } from './components/loginRegister/login/Login';
 import { Register } from './components/loginRegister/register/Register';
+import { Toaster } from 'react-hot-toast';
 
 export default function App() {
     const welcomePages = ['/', '/about', '/contact'].includes(
@@ -38,6 +39,7 @@ export default function App() {
                 </Routes>
             </main>
             {welcomePages && <Footer />}
+            <Toaster />
         </ThemeProvider>
     );
 }
