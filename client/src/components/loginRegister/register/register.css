@@ -1,0 +1,13 @@
+.reg-form div {
+    margin-bottom: 5px;
+}
+
+.reg-form button {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.reg-form p {
+    margin-bottom: 5px;
+    /* color: #e16913; */
+}
