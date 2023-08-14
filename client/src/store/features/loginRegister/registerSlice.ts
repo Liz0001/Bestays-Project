@@ -24,6 +24,7 @@ const registerSlice = createSlice({
 export function registerUser(newUserData: any) {
     return async function (dispatch: AppDispatch) {
         dispatch(setRegisterStatus(PageStatus.loading));
+        console.log('in registerUser:', newUserData);
 
         try {
             const res = await instance.post(
@@ -31,8 +32,10 @@ export function registerUser(newUserData: any) {
                 { newUserData },
                 { headers: { 'Content-Type': 'application/json' } }
             );
-            // console.log('in registerUser, (res):', res);
-            if (res.status === 200) {
+            console.log('in registerUser, (res):', res);
+            if (res.status === 201) {
+                console.log('Success');
+
                 dispatch(setRegisterStatus(PageStatus.success));
                 // toast
             } else {
