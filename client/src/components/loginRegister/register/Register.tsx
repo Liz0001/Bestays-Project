@@ -4,14 +4,17 @@ import { AppDispatch, RootState } from '../../../store/store';
 import { PageStatus } from '../../../enums/pageStatus';
 import LoadingSpinner from '../../general/LoadingSpinner';
 import { useNavigate } from 'react-router-dom';
-import { registerUser } from '../../../store/features/loginRegister/registerSlice';
+import {
+    registerUser,
+    setRegisterStatus,
+} from '../../../store/features/loginRegister/registerSlice';
 import { Box, Button, Container, Link, TextField } from '@mui/material';
 import { toast } from 'react-hot-toast';
 import EmailValidator from 'email-validator';
 import './register.css';
 
 export function Register() {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const dispatch: AppDispatch = useDispatch();
     const register = useSelector((state: RootState) => state.register);
 
@@ -91,6 +94,13 @@ export function Register() {
             dispatch(registerUser(userSignUpData));
         }
     };
+
+    useEffect(() => {
+        if (register.registerStatus == PageStatus.success) {
+            navigate('/signin');
+            dispatch(setRegisterStatus(PageStatus.initial));
+        }
+    }, [navigate, register, dispatch]);
 
     if (register.registerStatus == PageStatus.loading) {
         return <LoadingSpinner />;
