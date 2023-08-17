@@ -2,17 +2,20 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store/store';
 import { PageStatus } from '../../../enums/pageStatus';
+import LoadingSpinner from '../../general/LoadingSpinner';
+import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../../../store/features/loginRegister/registerSlice';
 import { Box, Button, Container, Link, TextField } from '@mui/material';
+import { toast } from 'react-hot-toast';
 import EmailValidator from 'email-validator';
 import './register.css';
 
 export function Register() {
+    // const navigate = useNavigate();
     const dispatch: AppDispatch = useDispatch();
     const register = useSelector((state: RootState) => state.register);
 
     const myTimeZone = () => Intl.DateTimeFormat().resolvedOptions().timeZone;
-
     const [userSignUpData, setUserSignUpData] = useState({
         name: '',
         email: '',
@@ -28,12 +31,12 @@ export function Register() {
         });
     };
 
-    const [validateName, setValidateName] = useState(true);
-    const [validateEmail, setValidateEmail] = useState(true);
-    const [validatePass, setValidatePass] = useState(true);
+    const [validateName, setValidateName] = useState(false);
+    const [validateEmail, setValidateEmail] = useState(false);
+    const [validatePass, setValidatePass] = useState(false);
 
-    function validateData() {
-        const name = userSignUpData.name.trim().length > 1;
+    useEffect(() => {
+        const name = userSignUpData.name.trim().length > 0;
         setValidateName(name);
 
         const email = EmailValidator.validate(userSignUpData.email);
@@ -61,33 +64,45 @@ export function Register() {
         } else {
             setValidatePass(false);
         }
-    }
+    }, [userSignUpData]);
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        validateData();
 
-        if (validateEmail && validateName && validatePass) {
+        if (userSignUpData.password != userSignUpData.passwordCheck) {
+            toast.error(`Passwords don't match`);
+        }
+
+        if (!validatePass) {
+            toast.error(
+                `Password must be at least: 6 letters, 1 special symbol, 1 number!`
+            );
+        }
+
+        if (!validateEmail) {
+            toast.error(`This email is not valid!`);
+        }
+
+        if (!validateName) {
+            toast.error(`Name can't be empty!`);
+        }
+
+        if (validateName && validateEmail && validatePass) {
             dispatch(registerUser(userSignUpData));
         }
     };
 
-    useEffect(() => {
-        // TODO:
-        if (register.registerStatus == PageStatus.loading) {
-            console.log('Loading spinner will be added here');
-        }
-        if (register.registerStatus == PageStatus.success) {
-            console.log('With SUCCESS user is directed to login page!');
-        }
-    }, [register.registerStatus]);
+    if (register.registerStatus == PageStatus.loading) {
+        return <LoadingSpinner />;
+    }
 
     return (
         <Container
             maxWidth="xs"
+            sx={{ py: 3 }}
             style={{
                 width: '100vw',
-                height: '100vh',
+                minHeight: '100vh',
                 display: 'flex',
                 flexDirection: 'column',
                 textAlign: 'center',
@@ -110,7 +125,6 @@ export function Register() {
                     id="name"
                     label="Name"
                     autoFocus
-                    helperText={validateName ? '' : `Name can't be empty!`}
                     onChange={changeHandler}
                     value={userSignUpData.name}
                 />
@@ -121,7 +135,6 @@ export function Register() {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
-                    helperText={validateEmail ? '' : 'This email is not valid!'}
                     onChange={changeHandler}
                     value={userSignUpData.email}
                 />
@@ -146,14 +159,6 @@ export function Register() {
                     id="passwordCheck"
                     autoComplete="new-password"
                     className="password"
-                    helperText={
-                        (userSignUpData.passwordCheck !==
-                            userSignUpData.password &&
-                            userSignUpData.passwordCheck.length > 4) ||
-                        !validatePass
-                            ? 'MAKE SURE PASSWORDS MATCH'
-                            : ''
-                    }
                     onChange={changeHandler}
                     value={userSignUpData.passwordCheck}
                 />
@@ -161,18 +166,23 @@ export function Register() {
                 <Button type="submit" variant="contained">
                     Sign up
                 </Button>
-
-                {/* LATER FOR PRIVACY NOTICE!!!
-                <FormControlLabel
-                    control={
-                        <Checkbox value="allowExtraEmails" color="primary" />
-                    }
-                    label="I want to receive inspiration, marketing promotions and updates via email."
-                /> */}
             </Box>
+
             <Link href="/signin" variant="body2">
                 Already have an account? Sign in
             </Link>
         </Container>
     );
+}
+
+{
+    /* LATER FOR PRIVACY NOTICE!!!
+        goes under the button
+
+    <FormControlLabel
+        control={
+            <Checkbox value="allowExtraEmails" color="primary" />
+        }
+        label="I want to receive inspiration, marketing promotions and updates via email."
+    /> */
 }
