@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { PageStatus } from '../../../enums/pageStatus';
 import { AppDispatch } from '../../store';
 import instance from '../../../config/axios';
+import { toast } from 'react-hot-toast';
 
 interface RegisterState {
     registerStatus: PageStatus;
@@ -24,7 +25,6 @@ const registerSlice = createSlice({
 export function registerUser(newUserData: any) {
     return async function (dispatch: AppDispatch) {
         dispatch(setRegisterStatus(PageStatus.loading));
-        console.log('in registerUser:', newUserData);
 
         try {
             const res = await instance.post(
@@ -32,21 +32,21 @@ export function registerUser(newUserData: any) {
                 { newUserData },
                 { headers: { 'Content-Type': 'application/json' } }
             );
-            console.log('in registerUser, (res):', res);
-            if (res.status === 201) {
-                console.log('Success');
 
+            if (res.status === 201) {
+                toast.success('Account created!');
                 dispatch(setRegisterStatus(PageStatus.success));
-                // toast
             } else {
+                toast.error('Something went wrong. Try again later.');
                 dispatch(setRegisterStatus(PageStatus.error));
-                // toast
             }
         } catch (error: any) {
-            // console.log('In registerUser Error:', error.request.responseText);
-
+            if (error.response.status == 500) {
+                toast.error('Something went wrong. Try again later.');
+            } else {
+                toast.error(error.response.data.message);
+            }
             dispatch(setRegisterStatus(PageStatus.error));
-            // toast
         }
     };
 }
