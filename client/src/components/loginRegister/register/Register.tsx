@@ -2,14 +2,23 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store/store';
 import { PageStatus } from '../../../enums/pageStatus';
-import LoadingSpinner from '../../general/LoadingSpinner';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 import {
     registerUser,
     setRegisterStatus,
 } from '../../../store/features/loginRegister/registerSlice';
-import { Box, Button, Container, Link, TextField } from '@mui/material';
-import { toast } from 'react-hot-toast';
+import {
+    Box,
+    Button,
+    Container,
+    IconButton,
+    InputAdornment,
+    Link,
+    TextField,
+} from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import LoadingSpinner from '../../general/LoadingSpinner';
 import EmailValidator from 'email-validator';
 import './register.css';
 
@@ -37,6 +46,10 @@ export function Register() {
     const [validateName, setValidateName] = useState(false);
     const [validateEmail, setValidateEmail] = useState(false);
     const [validatePass, setValidatePass] = useState(false);
+
+    const [showPassword, setShowPassword] = useState(false);
+    const handleClickShowPassword = () => setShowPassword(!showPassword);
+    const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
     useEffect(() => {
         const name = userSignUpData.name.trim().length > 0;
@@ -72,14 +85,14 @@ export function Register() {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        if (userSignUpData.password != userSignUpData.passwordCheck) {
-            toast.error(`Passwords don't match`);
-        }
-
         if (!validatePass) {
             toast.error(
                 `Password must be at least: 6 letters, 1 special symbol, 1 number!`
             );
+        }
+
+        if (userSignUpData.password != userSignUpData.passwordCheck) {
+            toast.error(`Passwords don't match`);
         }
 
         if (!validateEmail) {
@@ -153,7 +166,24 @@ export function Register() {
                     fullWidth
                     name="password"
                     label="Password"
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                >
+                                    {showPassword ? (
+                                        <Visibility />
+                                    ) : (
+                                        <VisibilityOff />
+                                    )}
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                    }}
                     id="password"
                     autoComplete="new-password"
                     onChange={changeHandler}
@@ -165,7 +195,24 @@ export function Register() {
                     fullWidth
                     name="passwordCheck"
                     label="Repeat Password"
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                >
+                                    {showPassword ? (
+                                        <Visibility />
+                                    ) : (
+                                        <VisibilityOff />
+                                    )}
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                    }}
                     id="passwordCheck"
                     autoComplete="new-password"
                     className="password"
