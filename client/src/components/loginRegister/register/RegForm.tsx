@@ -17,7 +17,7 @@ import {
     Link,
     TextField,
 } from '@mui/material';
-import { Dvr, Visibility, VisibilityOff } from '@mui/icons-material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import LoadingSpinner from '../../general/LoadingSpinner';
 import EmailValidator from 'email-validator';
 import './register.css';
