@@ -17,7 +17,7 @@ import {
     Link,
     TextField,
 } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { Dvr, Visibility, VisibilityOff } from '@mui/icons-material';
 import LoadingSpinner from '../../general/LoadingSpinner';
 import EmailValidator from 'email-validator';
 import './register.css';
@@ -120,18 +120,7 @@ export function RegForm() {
     }
 
     return (
-        <Container
-            maxWidth="xs"
-            sx={{ py: 3 }}
-            style={{
-                width: '100vw',
-                minHeight: '100vh',
-                display: 'flex',
-                flexDirection: 'column',
-                textAlign: 'center',
-                justifyContent: 'center',
-            }}
-        >
+        <Container className="reg-container" maxWidth="xs">
             <h1 className="heading">Create Account</h1>
             <Box
                 className="reg-form"
@@ -141,6 +130,7 @@ export function RegForm() {
                 sx={{ mt: 3 }}
             >
                 <TextField
+                    className="form-input"
                     autoComplete="name"
                     name="name"
                     required
@@ -152,6 +142,7 @@ export function RegForm() {
                     value={userSignUpData.name}
                 />
                 <TextField
+                    className="form-input"
                     required
                     fullWidth
                     id="email"
@@ -162,6 +153,7 @@ export function RegForm() {
                     value={userSignUpData.email}
                 />
                 <TextField
+                    className="form-input password"
                     required
                     fullWidth
                     name="password"
@@ -191,6 +183,7 @@ export function RegForm() {
                     helperText="Password must be at least: 6 letters, 1 special symbol, 1 number!"
                 />
                 <TextField
+                    className="form-input password"
                     required
                     fullWidth
                     name="passwordCheck"
@@ -215,7 +208,6 @@ export function RegForm() {
                     }}
                     id="passwordCheck"
                     autoComplete="new-password"
-                    className="password"
                     onChange={changeHandler}
                     value={userSignUpData.passwordCheck}
                 />
