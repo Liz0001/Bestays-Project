@@ -41,12 +41,18 @@ export function registerUser(newUserData: any) {
                 dispatch(setRegisterStatus(PageStatus.error));
             }
         } catch (error: any) {
+            dispatch(setRegisterStatus(PageStatus.error));
+
+            if (error.message == 'Network Error') {
+                toast.error('Something went wrong. Try again later.');
+                return;
+            }
+
             if (error.response.status == 500) {
                 toast.error('Something went wrong. Try again later.');
             } else {
                 toast.error(error.response.data.message);
             }
-            dispatch(setRegisterStatus(PageStatus.error));
         }
     };
 }
