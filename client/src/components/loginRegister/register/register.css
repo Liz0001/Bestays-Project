@@ -1,3 +1,11 @@
+.reg-container {
+    padding: 20px;
+    display: flex !important;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
 .reg-form div {
     margin-bottom: 5px;
 }
@@ -9,5 +17,71 @@
 
 .reg-form p {
     margin-bottom: 5px;
-    /* color: #e16913; */
+}
+
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    background-image: linear-gradient(
+        to right,
+        transparent,
+        transparent,
+        #ffebdd
+    ) !important;
+    z-index: -1;
+}
+
+.css-78trlr-MuiButtonBase-root-MuiIconButton-root {
+    z-index: 1;
+}
+
+.register-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    overflow: hidden;
+    position: relative;
+}
+
+.register-bg-image {
+    height: 100vh;
+    min-height: 500px;
+    width: 55%;
+
+    background-image: url('../../../assets/images/register.jpg');
+    background-repeat: no-repeat;
+    background-position: 40% 100%;
+    background-size: cover;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    border: none;
+    -webkit-box-shadow: 0 0 0px 1000px #ffebdd27 inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+@media only screen and (max-width: 750px) {
+    .register-container {
+        flex-direction: column;
+    }
+    .register-bg-image {
+        width: 100%;
+        height: 20vh;
+        min-height: unset;
+        background-position: 40% 25%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .register-bg-image {
+        height: 15vh;
+        min-height: unset;
+        background-position: 40% 20%;
+    }
 }
